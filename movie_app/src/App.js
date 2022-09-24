@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router , Route, Link} from 'react-router-dom'
-
+import { BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom'
+import PageNumber from "./components/Pagination/PageNumber";
+ 
 function App() {
   return (
     <Router>
@@ -16,7 +16,18 @@ function App() {
           </ul>
         </div>
       </div>
+
+     <Routes>
+        <Route path="/home" element={<PageNumber/>}></Route>
+        {/* <Route path="/movie" element={</>}></Route>
+        <Route path="/liked" element={</>}></Route>
+        <Route path="/blocked" element={</>}></Route> */}
+
+     </Routes>
+
     </Router>
+
+   
   );
 }
 
