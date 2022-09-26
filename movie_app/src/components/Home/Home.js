@@ -1,9 +1,10 @@
-import React from "react"
+import React from 'react'
+import PageNumber from '../Pagination/PageNumber'
 
-class Home extends React.Component {
-  render () {
-    return <div>首页的内容</div>
-  }
+function Home() {
+  return (
+    <PageNumber />
+  )
 }
 
 export default Home
