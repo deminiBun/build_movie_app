@@ -3,9 +3,12 @@ import "./SingleMovie.css";
 
 const SingleMovie = (props) => {
   const data = props.data;
+  const getMovieID = props.getMovieID;
   //   console.log(data);
   const handleMovieDetail = () => {
-    console.log(data.id);
+    // console.log(data.id);
+    getMovieID(data.id);
+    props.onShow(true);
   };
 
   return (

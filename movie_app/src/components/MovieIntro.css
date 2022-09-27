@@ -64,79 +64,79 @@
     border-radius: 5px;
 }
 
-#action {
+#Action {
     background-color: #faa2c1;
 }
 
-#adventure {
+#Adventure {
     background-color: #ffa8a8;
 }
 
-#animation {
+#Animation {
     background-color: #e599f7;
 }
 
-#comedy {
+#Comedy {
     background-color: #b197fc;
 }
 
-#crime {
+#Crime {
     background-color: #91a7ff;
 }
 
-#documentary {
+#Documentary {
     background-color: #74c0fc;
 }
 
-#drama {
+#Drama {
     background-color: #66d9e8;
 }
 
-#family {
+#Family {
     background-color: #63e6be;
 }
 
-#fantasy {
+#Fantasy {
     background-color: #8ce99a;
 }
 
-#history {
+#History {
     background-color: #c0eb75;
 }
 
-#horror {
+#Horror {
     background-color: #ffe066;
 }
 
-#music {
+#Music {
     background-color: #ffc078;
 }
 
-#mystery {
+#Mystery {
     background-color: #fd7e14;
 }
 
-#romance {
+#Romance {
     background-color: #fa5252;
 }
 
-#fiction {
+#Fiction {
     background-color: #228be6;
 }
 
-#tv {
+#Tv {
     background-color: #7950f2;
 }
 
-#thriller {
+#Thriller {
     background-color: #be4bdb;
 }
 
-#war{
+#War{
     background-color: #e64980;
 }
 
-#western {
+#Western {
     background-color: #40c057;
 }
 
@@ -170,4 +170,19 @@
     font-size: 3rem;
     font-weight: 300;
     /* max-width: 90%; */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+  }
+
+  .hidden {
+    display: none;
 }

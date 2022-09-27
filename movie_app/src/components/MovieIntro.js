@@ -1,95 +1,82 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./MovieIntro.css";
 
-const MovieIntro = () => {
-  let year = data.date.slice(0, 4);
-  useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US"
-    )
-      .then((res) => {
-        if (!res.ok) throw new Error("Something Went Wrong!!!");
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
+const MovieIntro = (props) => {
+  const showIntro = props.showIntro;
+  let data = props.data;
+  //   const genresList = props.genresList;
+  data = {
+    title: data.title,
+    production: data.production_companies,
+    genres: data.genres,
+    date: data.release_date,
+    overview: data.overview,
+    image: data.poster_path,
+  };
+
+  console.log(data);
+
+  // Change genre of a movie into an array
+  let genre = data.genres;
+  let genreArr = [];
+  console.log(genre);
+  if (genre) {
+    for (let element of genre) {
+      genreArr.push(element.name);
+    }
+  }
+  console.log(genreArr);
+  const showGenre = [];
+  if (genreArr.length !== 0) {
+    genreArr.forEach((data) => {
+      showGenre.push(
+        <div className='genre' id={data} key={data}>
+          {data}
+        </div>
+      );
+    });
+  }
+  const showProduction = [];
+  data.production.forEach((data) => {
+    showProduction.push(<div>{data.name}</div>);
   });
+
+  //   genre.forEach((element) => {
+  //     console.log(element);
+  //   });
+
+  // Fetch genre list
+  //   let year = data.date.slice(0, 4);
+  const closeIntro = () => {
+    props.closeIntro();
+  };
+
+  const content = () => {
+    return (
+      <>
+        <div className='modal-img'>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${data.image}`}
+            alt='movie poster'
+          />
+        </div>
+        <div className='modal-main'>
+          <div className='modal-title'>{data.title}</div>
+          <div className='modal-genre'>{showGenre}</div>
+          <div className='modal-overview'>
+            <p>{data.overview}</p>
+          </div>
+          <div className='modal-proinfo'>Productions</div>
+          <div className='modal-production'>{showProduction}</div>
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
-      <div className='modal-img'>
-        <img src={`https://image.tmdb.org/t/p/w500${data.image}`} />
-      </div>
-      <div className='modal-main'>
-        <div className='modal-title'>
-          {data.title} ({year})
-        </div>
-        <div className='modal-genre'>
-          <div className='genre hidden' id='action'>
-            Action
-          </div>
-          <div className='genre hidden' id='adventure'>
-            Adventure
-          </div>
-          <div className='genre hidden' id='animation'>
-            Animation
-          </div>
-          <div className='genre hidden' id='comedy'>
-            Comedy
-          </div>
-          <div className='genre hidden' id='crime'>
-            Crime
-          </div>
-          <div className='genre hidden' id='documentary'>
-            Documentary
-          </div>
-          <div className='genre hidden' id='drama'>
-            Drama
-          </div>
-          <div className='genre hidden' id='family'>
-            Family
-          </div>
-          <div className='genre hidden' id='fantasy'>
-            Fantasy
-          </div>
-          <div className='genre hidden' id='history'>
-            History
-          </div>
-          <div className='genre hidden' id='horror'>
-            Horror
-          </div>
-          <div className='genre hidden' id='music'>
-            Music
-          </div>
-          <div className='genre hidden' id='mystery'>
-            Mystery
-          </div>
-          <div className='genre hidden' id='romance'>
-            Romance
-          </div>
-          <div className='genre hidden' id='fiction'>
-            Science Fiction
-          </div>
-          <div className='genre hidden' id='tv'>
-            TV Movie
-          </div>
-          <div className='genre hidden' id='thriller'>
-            Thriller
-          </div>
-          <div className='genre hidden' id='war'>
-            War
-          </div>
-          <div className='genre hidden' id='western'>
-            Western
-          </div>
-        </div>
-        <div className='modal-overview'>
-          <p>{data.overview}</p>
-        </div>
-        <div className='modal-proinfo'>Productions</div>
-        <div className='modal-production'></div>
-      </div>
+      {showIntro ? <div className='modal'>{content()}</div> : null}
+      {showIntro ? <div className='overlay ' onClick={closeIntro}></div> : null}
     </>
   );
 };

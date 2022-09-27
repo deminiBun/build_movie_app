@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SingleMovie from "./SingleMovie";
 import "./MovieList.css";
 
 const MovieList = (props) => {
-  const [data, setData] = useState([]);
-  const page = props.page;
+  const getMovieID = props.getMovieID;
+  const data = props.movieData;
 
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US&page=${page}`
-    )
-      .then((res) => {
-        if (!res.ok) throw new Error("Something Went Wrong!!!");
-        return res.json();
-      })
-      .then((data) => {
-        const movies = Object.values(data)[1];
-        setData(movies);
-      });
-  }, [page]);
+  const getMovieIDHandler = (props) => {
+    getMovieID(props);
+  };
 
   const movieArr = [];
   data.forEach((element, index) => {
@@ -33,7 +23,14 @@ const MovieList = (props) => {
       type: movie.genre_ids,
       totalPages: data.total_pages,
     };
-    movieArr.push(<SingleMovie data={movie} key={movie.id} />);
+    movieArr.push(
+      <SingleMovie
+        data={movie}
+        key={movie.id}
+        getMovieID={getMovieIDHandler}
+        onShow={props.onShow}
+      />
+    );
   });
 
   return (

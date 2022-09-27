@@ -1,40 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Pagination.css";
 
 const Pagination = (props) => {
-  const [currPage, setCurrPage] = useState(1);
+  //   const [currPage, setCurrPage] = useState(1);
+  const currPage = props.currPage;
+  const getPage = props.getPage;
 
   const handleFirstBtn = () => {
-    setCurrPage(1);
+    // setCurrPage(1);
+    getPage(1);
   };
 
   const handlePrevBtn = () => {
-    setCurrPage(currPage - 1);
+    // setCurrPage(currPage - 1);
+    getPage(currPage - 1);
   };
 
   const handleNextBtn = () => {
-    setCurrPage(currPage + 1);
+    // setCurrPage(currPage + 1);
+    getPage(currPage + 1);
   };
 
   const handleLastBtn = () => {
-    setCurrPage(500);
+    // setCurrPage(500);
+    getPage(500);
   };
-
-  props.getPage(currPage);
 
   return (
     <nav>
       <div className='pagination'>
         <div className='pagination-container'>
           <button
-            className='page-btn btn-first btn-blur'
+            className='page-btn btn-first'
             onClick={handleFirstBtn}
+            disabled={currPage === 1}
           >
             FIRST
           </button>
           <button
-            className='page-btn btn-prev btn-blur'
+            className='page-btn btn-prev'
             onClick={handlePrevBtn}
+            disabled={currPage === 1}
           >
             PREV
           </button>
@@ -53,12 +59,20 @@ const Pagination = (props) => {
               </svg>
             </div>
             <div className='current-page-text'>PAGE:</div>
-            <div className='page-number'>1/500</div>
+            <div className='page-number'>{currPage}/500</div>
           </div>
-          <button className='page-btn btn-next' onClick={handleNextBtn}>
+          <button
+            className='page-btn btn-next'
+            onClick={handleNextBtn}
+            disabled={currPage === 500}
+          >
             NEXT
           </button>
-          <button className='page-btn btn-last' onClick={handleLastBtn}>
+          <button
+            className='page-btn btn-last'
+            onClick={handleLastBtn}
+            disabled={currPage === 500}
+          >
             LAST
           </button>
         </div>
