@@ -1,0 +1,49 @@
+.pagination {
+    height: 70px;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.page-container {
+    display: flex;
+    gap: 15px;
+}
+
+.page-btn {
+    padding: 10px 20px;
+    border-style: hidden;
+    border-radius: 10px;
+    background-color: #e4dad2;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-blur {
+    background-color: #f8f9fa;
+    cursor: default;
+}
+
+.current-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 400px;
+}
+
+.current-page-text {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.page-number {
+    font-size: 2rem;
+    font-weight: 400;
+    /* width: 300px; */
+}

@@ -1,0 +1,42 @@
+.container {
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.header-bottom-line {
+    height: 6px;
+    background-color: #555;
+    margin-top: 10px;
+}
+
+.header-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+    padding: 30px auto;
+    align-items: baseline;
+}
+
+.headerbtn {
+    font-size: 2.5rem;
+    font-weight: 200;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: #fdf2e9;
+}
+
+.headerbtn-bottom {
+    background-color: rgb(158, 51, 39);
+    height: 3px;
+    width: 90%;
+    margin: auto;
+    opacity: 0;
+}
+
+.header-title{
+    margin-top: 2rem;
+    font-size: 6rem;
+    font-weight: 800;
+}
