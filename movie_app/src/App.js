@@ -18,6 +18,7 @@ function App() {
   const [blockedList, setBlockedList] = useState([]);
   const [showIntro, setShowIntro] = useState(false);
   const [data, setData] = useState([]);
+  const [likedDetail, setLikedDetail] = useState([]);
   const handleGetPage = (props) => {
     setPage(props);
   };
@@ -71,20 +72,48 @@ function App() {
     }
   }, [movieID]);
 
-  let likedDetail = [];
-  likedList.forEach((element) => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${element}?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US
-    `
-    )
-      .then((res) => {
-        if (!res.ok) throw new Error("Something Went Wrong!!!");
-        return res.json();
-      })
-      .then((data) => {
-        likedDetail.push(data);
-      });
-  });
+  // const test = () => {
+  //   const temp = [];
+  //   console.log(likedList);
+  //   likedList.forEach(async (id) => {
+  //     const res = await fetch(
+  //       `https://api.themoviedb.org/3/movie/${id}?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US`
+  //     );
+  //     console.log(res.json());
+  //     temp.push(res.json());
+  //   });
+  //   return temp;
+  // };
+
+  // const handleFecthLikedMovie = async () => {
+  //   const temp = test();
+  //   console.log(temp);
+  //   Promise.all(temp).then((value) => {
+  //     setLikedDetail(value);
+  //   });
+  // };
+
+  // useEffect(async () => {
+  //   console.log("12431542642");
+  //   handleFecthLikedMovie();
+  // }, [likedList, handleFecthLikedMovie]);
+
+  useEffect(() => {
+    likedList.forEach((element) => {
+      fetch(
+        `https://api.themoviedb.org/3/movie/${element}?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US
+        `
+      )
+        .then((res) => {
+          if (!res.ok) throw new Error("Something Went Wrong!!!");
+          return res.json();
+        })
+        .then((data) => {
+          const tem = [...likedDetail, data];
+          setLikedDetail(tem);
+        });
+    });
+  }, [likedList]);
 
   const onShowHandler = () => {
     setShowIntro(true);
@@ -95,21 +124,39 @@ function App() {
   };
 
   const likedListHandler = (props) => {
-    // console.log(props);
     let newList = [...likedList];
     newList.push(props);
-    setLikedList(newList);
+    let uniq = (a) => [...new Set(newList)];
+    setLikedList(uniq);
   };
-
-  console.log(likedList);
 
   const blockedListHandler = (props) => {
     let newList = [...blockedList];
     newList.push(props);
-    setBlockedList(newList);
+    let uniq = (a) => [...new Set(newList)];
+    setBlockedList(uniq);
+
+    // Remove from liked list
+    let newLikedList = [];
+    for (let element of likedList) {
+      if (element !== props) {
+        newLikedList.push(element);
+      }
+    }
+    setLikedList(newLikedList);
   };
 
-  console.log(blockedList);
+  const unlikedListHandler = (props) => {
+    let newList = [];
+    for (let element of likedDetail) {
+      if (element.id !== props) {
+        newList.push(element);
+      }
+    }
+    setLikedDetail(newList);
+  };
+
+  // console.log(blockedList);
 
   return (
     <>
@@ -150,6 +197,8 @@ function App() {
                 likedList={likedList}
                 likedDetail={likedDetail}
                 getMovieID={handleGetMovieID}
+                handleBlockedList={blockedListHandler}
+                handleUnlikedList={unlikedListHandler}
               />
             </div>
           }
@@ -167,4 +216,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
