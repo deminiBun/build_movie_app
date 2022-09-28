@@ -3,15 +3,7 @@ import SingleLikedMovie from "./SingleLikedMovie";
 import "./MovieList.css";
 
 const LikedList = (props) => {
-  //   const movieDetail = props.detail;
-  //   const likedList = props.likedList;
   const data = props.likedDetail;
-  const getMovieID = props.getMovieID;
-
-  const getMovieIDHandler = (props) => {
-    getMovieID(props);
-  };
-
   const movieArr = [];
   data.forEach((element, index) => {
     let movie = data[index];
@@ -29,9 +21,7 @@ const LikedList = (props) => {
       <SingleLikedMovie
         data={movie}
         key={movie.id}
-        getMovieID={getMovieIDHandler}
-        onShow={props.onShow}
-        handleLikedList={props.handleLikedList}
+        handleUnlikedList={props.handleUnlikedList}
         handleBlockedList={props.handleBlockedList}
       />
     );
