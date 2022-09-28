@@ -1,0 +1,18 @@
+.container {
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.header-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+    padding: 30px auto;
+    align-items: baseline;
+}
+
+.header-title{
+    margin-top: 20rem;
+    font-size: 6rem;
+    font-weight: 800;
+}

@@ -1,0 +1,188 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 90rem;
+  
+    padding: 6rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 20px;
+    /* background-image: url(https://image.tmdb.org/t/p/w500/vvObT0eIWGlArLQx3K5wZ0uT812.jpg); */
+    background-color: #868e96;
+    border-radius: 30px;
+  }
+
+  /* modal-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 20px;
+  } */
+
+.modal-img img{
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.modal-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #fdf2e9;
+    /* max-width: 100%; */
+    overflow: scroll;
+}
+
+.modal-genre {
+    display: flex;
+    font-size: 18px;
+    font-weight: 200;
+    row-gap: 2px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: repeat(7, 130px);
+    grid-template-rows: repeat(3, 50px);
+    column-gap: 30px;
+    /* display: flex;
+    font-size: 18px;
+    font-weight: 200;
+    gap: 40px;
+    height: 200px; */
+}
+
+.genre {
+    background-color: antiquewhite;
+    text-align: center;
+    color: #555;
+    margin-top: auto;
+    border-radius: 5px;
+}
+
+#Action {
+    background-color: #faa2c1;
+}
+
+#Adventure {
+    background-color: #ffa8a8;
+}
+
+#Animation {
+    background-color: #e599f7;
+}
+
+#Comedy {
+    background-color: #b197fc;
+}
+
+#Crime {
+    background-color: #91a7ff;
+}
+
+#Documentary {
+    background-color: #74c0fc;
+}
+
+#Drama {
+    background-color: #66d9e8;
+}
+
+#Family {
+    background-color: #63e6be;
+}
+
+#Fantasy {
+    background-color: #8ce99a;
+}
+
+#History {
+    background-color: #c0eb75;
+}
+
+#Horror {
+    background-color: #ffe066;
+}
+
+#Music {
+    background-color: #ffc078;
+}
+
+#Mystery {
+    background-color: #fd7e14;
+}
+
+#Romance {
+    background-color: #fa5252;
+}
+
+#Fiction {
+    background-color: #228be6;
+}
+
+#Tv {
+    background-color: #7950f2;
+}
+
+#Thriller {
+    background-color: #be4bdb;
+}
+
+#War{
+    background-color: #e64980;
+}
+
+#Western {
+    background-color: #40c057;
+}
+
+.modal-title {
+    font-size: 5.5rem;
+    font-weight: 500;
+    max-width: 80%;
+}
+
+.modal-overview {
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 150;
+    line-height: 1.5;
+    max-width: 88%;
+}
+
+.modal-production {
+    font-size: 2rem;
+    font-weight: 150;
+    background-color: #adb5bd;
+    /* height: 8rem; */
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 88%;
+
+}
+
+.modal-proinfo {
+    margin-top: 40px;
+    font-size: 3rem;
+    font-weight: 300;
+    /* max-width: 90%; */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+  }
+
+  .hidden {
+    display: none;
+}
