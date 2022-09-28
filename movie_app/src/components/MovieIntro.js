@@ -14,18 +14,14 @@ const MovieIntro = (props) => {
     image: data.poster_path,
   };
 
-  console.log(data);
-
   // Change genre of a movie into an array
   let genre = data.genres;
   let genreArr = [];
-  console.log(genre);
   if (genre) {
     for (let element of genre) {
       genreArr.push(element.name);
     }
   }
-  console.log(genreArr);
   const showGenre = [];
   if (genreArr.length !== 0) {
     genreArr.forEach((data) => {
@@ -37,9 +33,11 @@ const MovieIntro = (props) => {
     });
   }
   const showProduction = [];
-  data.production.forEach((data) => {
-    showProduction.push(<div>{data.name}</div>);
-  });
+  if (genreArr.length !== 0) {
+    data.production.forEach((data) => {
+      showProduction.push(<div key={data.name}>{data.name}</div>);
+    });
+  }
 
   //   genre.forEach((element) => {
   //     console.log(element);

@@ -1,6 +1,7 @@
 import React from "react";
 import "./NavBar.css";
 import icon from "../assets/icon.png";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -13,22 +14,32 @@ const NavBar = () => {
           height='100px'
         />
         <div className='movie-list-hover'>
-          <button className='headerbtn headerbtn-movie-list'>Movie List</button>
+          <Link to='/'>
+            <button className='headerbtn headerbtn-movie-list'>
+              Movie List
+            </button>
+          </Link>
           <div className='headerbtn-bottom'></div>
         </div>
         <div className='liked-list-hover'>
-          <button className='headerbtn headerbtn-liked-list'>Liked List</button>
+          <Link to='/liked'>
+            <button className='headerbtn headerbtn-liked-list'>
+              Liked List
+            </button>
+          </Link>
           <div className='headerbtn-bottom'></div>
         </div>
         <div className='blocked-list-hover'>
-          <button className='headerbtn headerbtn-blocked-list'>
-            Blocked List
-          </button>
+          <Link to='/blocked'>
+            <button className='headerbtn headerbtn-blocked-list'>
+              Blocked List
+            </button>
+          </Link>
+
           <div className='headerbtn-bottom'></div>
         </div>
       </div>
       <div className='header-bottom-line'></div>
-      <h1 className='header-title'>The Most Popular Movies</h1>
     </header>
   );
 };

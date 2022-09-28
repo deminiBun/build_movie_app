@@ -1,10 +1,12 @@
 import React from "react";
-import SingleMovie from "./SingleMovie";
+import SingleLikedMovie from "./SingleLikedMovie";
 import "./MovieList.css";
 
-const MovieList = (props) => {
+const LikedList = (props) => {
+  //   const movieDetail = props.detail;
+  //   const likedList = props.likedList;
+  const data = props.likedDetail;
   const getMovieID = props.getMovieID;
-  const data = props.movieData;
 
   const getMovieIDHandler = (props) => {
     getMovieID(props);
@@ -24,7 +26,7 @@ const MovieList = (props) => {
       totalPages: data.total_pages,
     };
     movieArr.push(
-      <SingleMovie
+      <SingleLikedMovie
         data={movie}
         key={movie.id}
         getMovieID={getMovieIDHandler}
@@ -42,4 +44,4 @@ const MovieList = (props) => {
   );
 };
 
-export default MovieList;
+export default LikedList;

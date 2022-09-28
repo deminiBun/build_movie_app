@@ -1,7 +1,7 @@
 import React from "react";
-import "./SingleMovie.css";
+import "./SingleLikedMovie.css";
 
-const SingleMovie = (props) => {
+const SingleLikedMovie = (props) => {
   const data = props.data;
   const getMovieID = props.getMovieID;
   //   console.log(data);
@@ -23,9 +23,9 @@ const SingleMovie = (props) => {
 
   return (
     <div className='movie-container' id={data.id}>
-      <div className='like-it' onClick={handleLike}>
+      {/* <div className='like-it' onClick={handleLike}>
         <div className='like-it-inner'>&#x2764;</div>
-      </div>
+      </div> */}
       <div className='movie-img'>
         <img
           src={`https://image.tmdb.org/t/p/w500${data.image}`}
@@ -37,6 +37,9 @@ const SingleMovie = (props) => {
         <h3>{data.title}</h3>
       </div>
       <div className='movie-userAction'>
+        <button className='movie-unlike' onClick={handleBlock}>
+          Unlike
+        </button>
         <button className='movie-block' onClick={handleBlock}>
           Block
         </button>
@@ -48,4 +51,4 @@ const SingleMovie = (props) => {
   );
 };
 
-export default SingleMovie;
+export default SingleLikedMovie;
