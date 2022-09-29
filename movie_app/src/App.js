@@ -1,30 +1,38 @@
-import "./App.css";
-import React, { useState, useEffect } from "react";
-import MovieList from "./components/MovieList";
-import NavBar from "./components/NavBar";
-import { Header } from "./components/Header";
-import Pagination from "./components/Pagination";
-import MovieIntro from "./components/MovieIntro";
-import { Route, Routes } from "react-router-dom";
-import LikedList from "./components/LikedList";
+import "./App.css"
+import React, { useState, useEffect } from "react"
+import MovieList from "./components/MovieList"
+import NavBar from "./components/NavBar"
+import { Header } from "./components/Header"
+import Pagination from "./components/Pagination"
+import MovieIntro from "./components/MovieIntro"
+import { Route, Routes } from "react-router-dom"
+import LikedList from "./components/LikedList"
+import Filter from "./components/Filter"
 // import Modal from "./components/Modal";
 
-function App() {
-  const [page, setPage] = useState(1);
-  const [movieID, setMovieID] = useState();
-  const [movieDetail, setMovieDetail] = useState([]);
-  const [genresList, setGenresList] = useState([]);
-  const [likedList, setLikedList] = useState([]);
-  const [blockedList, setBlockedList] = useState([]);
-  const [showIntro, setShowIntro] = useState(false);
-  const [data, setData] = useState([]);
+function App () {
+  const [page, setPage] = useState(1)
+  const [movieID, setMovieID] = useState()
+  const [movieDetail, setMovieDetail] = useState([])
+  const [genresList, setGenresList] = useState([])
+  const [likedList, setLikedList] = useState([])
+  const [blockedList, setBlockedList] = useState([])
+  const [showIntro, setShowIntro] = useState(false)
+  const [data, setData] = useState([])
+  const [api, setAPI] = useState("https://api.themoviedb.org/3/movie/popular?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US&page=")
+
   const handleGetPage = (props) => {
-    setPage(props);
-  };
+    setPage(props)
+  }
+
+  const handleSetAPI = (new_api) => {
+    setAPI(new_api)
+    setPage(1)
+  }
 
   const handleGetMovieID = (props) => {
-    setMovieID(props);
-  };
+    setMovieID(props)
+  }
 
   //fetch genres list
   useEffect(() => {
@@ -32,27 +40,27 @@ function App() {
       "https://api.themoviedb.org/3/genre/movie/list?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US"
     )
       .then((res) => {
-        if (!res.ok) throw new Error("Something Went Wrong!!!");
-        return res.json();
+        if (!res.ok) throw new Error("Something Went Wrong!!!")
+        return res.json()
       })
       .then((data) => {
-        setGenresList(data.genres);
-      });
-  }, []);
+        setGenresList(data.genres)
+      })
+  }, [])
   //fetch entire popular movie list data
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US&page=${page}`
+      api + `${page}`
     )
       .then((res) => {
-        if (!res.ok) throw new Error("Something Went Wrong!!!");
-        return res.json();
+        if (!res.ok) throw new Error("Something Went Wrong!!!")
+        return res.json()
       })
       .then((data) => {
-        const movies = Object.values(data)[1];
-        setData(movies);
-      });
-  }, [page]);
+        const movies = data.results
+        setData(movies)
+      })
+  }, [page, api])
 
   // Fetch singel movie detail according to ID
   useEffect(() => {
@@ -62,54 +70,54 @@ function App() {
       `
       )
         .then((res) => {
-          if (!res.ok) throw new Error("Something Went Wrong!!!");
-          return res.json();
+          if (!res.ok) throw new Error("Something Went Wrong!!!")
+          return res.json()
         })
         .then((data) => {
-          setMovieDetail(data);
-        });
+          setMovieDetail(data)
+        })
     }
-  }, [movieID]);
+  }, [movieID])
 
-  let likedDetail = [];
+  let likedDetail = []
   likedList.forEach((element) => {
     fetch(
       `https://api.themoviedb.org/3/movie/${element}?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US
     `
     )
       .then((res) => {
-        if (!res.ok) throw new Error("Something Went Wrong!!!");
-        return res.json();
+        if (!res.ok) throw new Error("Something Went Wrong!!!")
+        return res.json()
       })
       .then((data) => {
-        likedDetail.push(data);
-      });
-  });
+        likedDetail.push(data)
+      })
+  })
 
   const onShowHandler = () => {
-    setShowIntro(true);
-  };
+    setShowIntro(true)
+  }
 
   const closeIntroHandler = () => {
-    setShowIntro(false);
-  };
+    setShowIntro(false)
+  }
 
   const likedListHandler = (props) => {
     // console.log(props);
-    let newList = [...likedList];
-    newList.push(props);
-    setLikedList(newList);
-  };
+    let newList = [...likedList]
+    newList.push(props)
+    setLikedList(newList)
+  }
 
-  console.log(likedList);
+  console.log(likedList)
 
   const blockedListHandler = (props) => {
-    let newList = [...blockedList];
-    newList.push(props);
-    setBlockedList(newList);
-  };
+    let newList = [...blockedList]
+    newList.push(props)
+    setBlockedList(newList)
+  }
 
-  console.log(blockedList);
+  console.log(blockedList)
 
   return (
     <>
@@ -121,6 +129,7 @@ function App() {
             <div className='App'>
               <Header title='The Most Popular Movies' />
               <Pagination getPage={handleGetPage} currPage={page} />
+              <Filter setAPI={handleSetAPI} />
               <MovieList
                 page={page}
                 getMovieID={handleGetMovieID}
@@ -164,7 +173,7 @@ function App() {
         />
       </Routes>
     </>
-  );
+  )
 }
 
 export default App
