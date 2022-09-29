@@ -1,18 +1,18 @@
-import React from "react";
-import SingleMovie from "./SingleMovie";
-import "./MovieList.css";
+import React from "react"
+import SingleMovie from "./SingleMovie"
+import "./MovieList.css"
 
 const MovieList = (props) => {
-  const getMovieID = props.getMovieID;
-  const data = props.movieData;
+  const getMovieID = props.getMovieID
+  const data = props.movieData
 
   const getMovieIDHandler = (props) => {
-    getMovieID(props);
-  };
+    getMovieID(props)
+  }
 
-  const movieArr = [];
+  const movieArr = []
   data.forEach((element, index) => {
-    let movie = data[index];
+    let movie = data[index]
     movie = {
       id: movie.id,
       title: movie.title,
@@ -22,7 +22,7 @@ const MovieList = (props) => {
       background: movie.backdrop_path,
       type: movie.genre_ids,
       totalPages: data.total_pages,
-    };
+    }
     movieArr.push(
       <SingleMovie
         data={movie}
@@ -32,14 +32,14 @@ const MovieList = (props) => {
         handleLikedList={props.handleLikedList}
         handleBlockedList={props.handleBlockedList}
       />
-    );
-  });
+    )
+  })
 
   return (
     <main>
       <div className='gallery-container'>{movieArr}</div>
     </main>
-  );
-};
+  )
+}
 
-export default MovieList;
+export default MovieList

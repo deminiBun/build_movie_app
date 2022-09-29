@@ -1,25 +1,25 @@
-import React from "react";
-import "./SingleMovie.css";
+import React from "react"
+import "./SingleMovie.css"
 
 const SingleMovie = (props) => {
-  const data = props.data;
-  const getMovieID = props.getMovieID;
+  const data = props.data
+  const getMovieID = props.getMovieID
   //   console.log(data);
   const handleMovieDetail = () => {
     // console.log(data.id);
-    getMovieID(data.id);
-    props.onShow(true);
-  };
+    getMovieID(data.id)
+    props.onShow(true)
+  }
 
   const handleLike = () => {
-    props.handleLikedList(data.id);
+    props.handleLikedList(data.id)
     // console.log(e);
     // console.log(data.id);
-  };
+  }
 
   const handleBlock = () => {
-    props.handleBlockedList(data.id);
-  };
+    props.handleBlockedList(data.id)
+  }
 
   return (
     <div className='movie-container' id={data.id}>
@@ -45,7 +45,7 @@ const SingleMovie = (props) => {
         <p>{data.date}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleMovie;
+export default SingleMovie

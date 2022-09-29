@@ -1,0 +1,17 @@
+.filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-rating,
+.btn-popular,
+.btn-upcoming {
+  padding: 10px 20px;
+  border-style: hidden;
+  border-radius: 10px;
+  background-color: rgba(173, 216, 230, 0.73);
+  cursor: pointer;
+  display: inline-block;
+}
