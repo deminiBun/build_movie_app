@@ -1,7 +1,6 @@
-import React from "react";
-import "./SingleLikedMovie.css";
+import "./SingleBlockedMovie.css";
 
-const SingleLikedMovie = (props) => {
+const SingleBlockedMovie = (props) => {
   const data = props.data;
   const getMovieID = props.getMovieID;
   //   console.log(data);
@@ -11,9 +10,8 @@ const SingleLikedMovie = (props) => {
     props.onShow(true);
   };
 
-  const handleUnlike = () => {
-    // props.handleBlockedList(data.id);
-    props.removeFromLikedList(data.id);
+  const handleUnblock = () => {
+    props.removeFromBlockedList(data.id);
   };
 
   return (
@@ -32,12 +30,12 @@ const SingleLikedMovie = (props) => {
         <h3>{data.title}</h3>
       </div>
       <div className='movie-userAction'>
-        <button className='movie-unlike' onClick={handleUnlike}>
-          Dislike
+        <button className='movie-block' onClick={handleUnblock}>
+          Unblock
         </button>
       </div>
     </div>
   );
 };
 
-export default SingleLikedMovie;
+export default SingleBlockedMovie;
