@@ -1,9 +1,9 @@
 import React from "react";
-import SingleLikedMovie from "./SingleLikedMovie";
-import "./LikedList.css";
+import SingleBlockedMovie from "./SingleBlockedMovie";
+import "./BlockedList.css";
 
-const LikedList = (props) => {
-  const data = props.likedDetail;
+const BlockedList = (props) => {
+  const data = props.blockedDetail;
   const getMovieID = props.getMovieID;
 
   const getMovieIDHandler = (props) => {
@@ -24,26 +24,27 @@ const LikedList = (props) => {
       totalPages: data.total_pages,
     };
     movieArr.push(
-      <SingleLikedMovie
+      <SingleBlockedMovie
         data={movie}
         key={movie.id}
         getMovieID={getMovieIDHandler}
         onShow={props.onShow}
-        removeFromLikedList={props.removeFromLikedList}
+        // handleLikedList={props.handleLikedList}
+        // handleBlockedList={props.handleBlockedList}
+        removeFromBlockedList={props.removeFromBlockedList}
       />
     );
   });
-  console.log(movieArr.length);
 
   return (
     <main>
       {movieArr.length ? (
         <div className='gallery-container'>{movieArr}</div>
       ) : (
-        <div className='no-movie'>Nothing Here! Add Some</div>
+        <div className='no-movie'>No Blocked Movie</div>
       )}
     </main>
   );
 };
 
-export default LikedList;
+export default BlockedList;
