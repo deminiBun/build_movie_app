@@ -11,9 +11,14 @@ const SingleLikedMovie = (props) => {
     props.onShow(true);
   };
 
-  const handleUnlike = () => {
-    // props.handleBlockedList(data.id);
-    props.removeFromLikedList(data.id);
+  const handleLike = () => {
+    props.handleLikedList(data.id);
+    // console.log(e);
+    // console.log(data.id);
+  };
+
+  const handleBlock = () => {
+    props.handleBlockedList(data.id);
   };
 
   return (
@@ -32,9 +37,15 @@ const SingleLikedMovie = (props) => {
         <h3>{data.title}</h3>
       </div>
       <div className='movie-userAction'>
-        <button className='movie-unlike' onClick={handleUnlike}>
-          Dislike
+        <button className='movie-unlike' onClick={handleBlock}>
+          Unlike
         </button>
+        <button className='movie-block' onClick={handleBlock}>
+          Block
+        </button>
+      </div>
+      <div className='movie-date'>
+        <p>{data.date}</p>
       </div>
     </div>
   );

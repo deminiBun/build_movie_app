@@ -1,8 +1,10 @@
 import React from "react";
 import SingleLikedMovie from "./SingleLikedMovie";
-import "./LikedList.css";
+import "./MovieList.css";
 
 const LikedList = (props) => {
+  //   const movieDetail = props.detail;
+  //   const likedList = props.likedList;
   const data = props.likedDetail;
   const getMovieID = props.getMovieID;
 
@@ -29,19 +31,15 @@ const LikedList = (props) => {
         key={movie.id}
         getMovieID={getMovieIDHandler}
         onShow={props.onShow}
-        removeFromLikedList={props.removeFromLikedList}
+        handleLikedList={props.handleLikedList}
+        handleBlockedList={props.handleBlockedList}
       />
     );
   });
-  console.log(movieArr.length);
 
   return (
     <main>
-      {movieArr.length ? (
-        <div className='gallery-container'>{movieArr}</div>
-      ) : (
-        <div className='no-movie'>Nothing Here! Add Some</div>
-      )}
+      <div className='gallery-container'>{movieArr}</div>
     </main>
   );
 };
