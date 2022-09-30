@@ -7,6 +7,7 @@ import Pagination from "./components/Pagination";
 import MovieIntro from "./components/MovieIntro";
 import { Route, Routes } from "react-router-dom";
 import LikedList from "./components/LikedList";
+import BlockedList from "./components/BlockedList";
 // import Modal from "./components/Modal";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [showIntro, setShowIntro] = useState(false);
   const [data, setData] = useState([]);
   const [likedDetail, setLikedDetail] = useState([]);
+  const [blockedDetail, setBlockedDetail] = useState([]);
   const handleGetPage = (props) => {
     setPage(props);
   };
@@ -97,7 +99,7 @@ function App() {
   //   console.log("12431542642");
   //   handleFecthLikedMovie();
   // }, [likedList, handleFecthLikedMovie]);
-
+  // let tem = [];
   useEffect(() => {
     likedList.forEach((element) => {
       fetch(
@@ -109,11 +111,59 @@ function App() {
           return res.json();
         })
         .then((data) => {
-          const tem = [...likedDetail, data];
+          // console.log(data);
+          let tem = [...likedDetail, data];
+          // for (element of likedDetail) {
+          //   if (data.id !== element.id) {
+          //     let newTem = [...likedDetail];
+          //     newTem.push(data);
+          //     tem = newTem;
+          //   }
+          // }
+          tem = tem.filter(
+            (value, index, self) =>
+              index === self.findIndex((t) => t.id === value.id)
+          );
+          console.log(tem);
           setLikedDetail(tem);
         });
     });
   }, [likedList]);
+  // const likedDetail = [];
+  // likedList.forEach((element) => {
+  //   fetch(
+  //     `https://api.themoviedb.org/3/movie/${element}?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US
+  //     `
+  //   )
+  //     .then((res) => {
+  //       if (!res.ok) throw new Error("Something Went Wrong!!!");
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       // console.log(data);
+  //       likedDetail.push(data);
+  //     });
+  // });
+
+  // useEffect(() => {
+  //   blockedList.forEach((id) => {
+  //     fetch(
+  //       `https://api.themoviedb.org/3/movie/${id}?api_key=ba0b9a7674177e1522e562b4d529814e&language=en-US
+  //       `
+  //     )
+  //       .then((res) => {
+  //         if (!res.ok) throw new Error("Something Went Wrong!!!");
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         let newList = [];
+  //         newList.push(data);
+  //         setBlockedList(newList);
+  //       });
+  //   });
+  // }, []);
+
+  // console.log(blockedList);
 
   const onShowHandler = () => {
     setShowIntro(true);
@@ -126,14 +176,18 @@ function App() {
   const likedListHandler = (props) => {
     let newList = [...likedList];
     newList.push(props);
-    let uniq = (a) => [...new Set(newList)];
+    let uniq = [...new Set(newList)];
+    console.log(uniq);
     setLikedList(uniq);
   };
 
   const blockedListHandler = (props) => {
     let newList = [...blockedList];
     newList.push(props);
-    let uniq = (a) => [...new Set(newList)];
+    let uniq = newList.filter(function (item, pos, self) {
+      return self.indexOf(item) === pos;
+    });
+    // let uniq = [...new Set(newList)];
     setBlockedList(uniq);
 
     // Remove from liked list
@@ -153,7 +207,9 @@ function App() {
         newList.push(element);
       }
     }
+    console.log(newList);
     setLikedDetail(newList);
+    // likedDetail = newList;
   };
 
   // console.log(blockedList);
@@ -193,10 +249,7 @@ function App() {
             <div className='App'>
               <Header title='My Liked List' />
               <LikedList
-                detail={movieDetail}
-                likedList={likedList}
                 likedDetail={likedDetail}
-                getMovieID={handleGetMovieID}
                 handleBlockedList={blockedListHandler}
                 handleUnlikedList={unlikedListHandler}
               />
@@ -208,6 +261,11 @@ function App() {
           element={
             <div className='App'>
               <Header title='Blocked List' />
+              <BlockedList
+                blockedList={blockedList}
+                handleLikedList={likedListHandler}
+                handleBlockedList={blockedListHandler}
+              />
             </div>
           }
         />

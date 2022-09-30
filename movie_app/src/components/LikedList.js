@@ -17,6 +17,7 @@ const LikedList = (props) => {
       type: movie.genre_ids,
       totalPages: data.total_pages,
     };
+
     movieArr.push(
       <SingleLikedMovie
         data={movie}
@@ -27,9 +28,11 @@ const LikedList = (props) => {
     );
   });
 
+  let newMovieArr = [...new Set(movieArr)];
+
   return (
     <main>
-      <div className='gallery-container'>{movieArr}</div>
+      <div className='gallery-container'>{newMovieArr}</div>
     </main>
   );
 };
